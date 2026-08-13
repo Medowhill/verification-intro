@@ -1,0 +1,211 @@
+\documentclass{beamer}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+
+\definecolor{plrgprimary}{HTML}{1F2A44}
+\definecolor{plrgaccent}{HTML}{3730A3}
+\definecolor{plrgfunctional}{HTML}{0F766E}
+\definecolor{plrgbackground}{HTML}{F8FAFC}
+\definecolor{plrgtext}{HTML}{111827}
+
+\usefonttheme{professionalfonts}
+
+\setbeamercolor{background canvas}{bg=plrgbackground}
+\setbeamercolor{title}{fg=plrgprimary}
+\setbeamercolor{frametitle}{fg=plrgprimary}
+\setbeamercolor{subtitle}{fg=plrgprimary}
+\setbeamercolor{structure}{fg=plrgaccent}
+\setbeamercolor{normal text}{fg=plrgtext}
+
+\setbeamerfont{title}{series=\bfseries}
+\setbeamerfont{frametitle}{series=\bfseries}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+
+\hypersetup{
+  colorlinks=true,
+  urlcolor=plrgfunctional,
+}
+
+\title{Proof Assistants}
+\subtitle{Introduction to Program Verification --- Part 1}
+\author{Jaemin Hong}
+\date{}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Install Lean}
+  \begin{itemize}
+    \item 1. Install VS Code
+    \item 2. Install the Lean 4 extension
+    \item Refer to \url{https://lean-lang.org/install}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Program Verification}
+  \begin{itemize}
+    \item Proving a property of a program
+    \item Some interesting properties
+      \begin{itemize}
+        \item Absence of memory safety violations
+        \item Information flow security
+        \item (Non-)termination
+        \item Type soundness
+        \item Compiler correctness
+        \item This program computes the Fibonacci number of its input
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Comparison with Other Approaches}
+  \begin{itemize}
+    \item Testing
+      \begin{itemize}
+        \item Can prove the presence of bugs, but not their absence
+        \item Typically requires an executable oracle
+      \end{itemize}
+    \item (Sound) static analysis
+      \begin{itemize}
+        \item Suffers from false positives
+        \item Each analyzer targets a specific class of properties
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Validation of Proofs}
+  \begin{itemize}
+    \item How can we trust a proof consisting of thousands of lines?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Proof Assistants}
+  \begin{quote}
+    \textbf{Formal proof assistants} are pieces of software designed to help their
+    users carry out computer-checked proofs. We usually call them \textbf{proof
+    assistants}, or \textbf{interactive theorem provers}, but a frustrated student
+    coined the phrase ``proof-preventing beasts,'' and dictation software
+    occasionally misunderstands ``theorem prover'' as ``fear improver.''
+  \end{quote}
+
+  (Baanen et al., The Hitchhiker's Guide to Logical Verification\footnote{\url{https://github.com/lean-forward/logical_verification_2025}})
+\end{frame}
+
+\begin{frame}{Formal Proofs}
+  \begin{quote}
+    A \textbf{formal proof} is a logical argument expressed in a logical formalism.
+    In this context, ``formal'' means ``logical'' or ``logic-based.''
+  \end{quote}
+
+  \begin{quote}
+    An \textbf{informal proof} is what a mathematician would normally call a proof.
+    The level of detail can vary a lot, and phrases such as ``it is obvious
+    that,'' ``clearly,'' and ``without loss of generality'' move some of the
+    proof burden onto the reader.
+  \end{quote}
+
+  (Baanen et al., The Hitchhiker's Guide to Logical Verification)
+\end{frame}
+
+\begin{frame}{Different Proof Assistants}
+  \begin{itemize}
+    \item Grouped by their logical foundation
+      \begin{itemize}
+        \item Dependent type theory: Agda, Lean, Rocq (formerly known as Coq)
+        \item Simple type theory: Isabelle/HOL
+        \item Set theory: Isabelle/ZF
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Formal Verification in the Real World}
+  \begin{itemize}
+    \item CompCert, CakeML: verified compilers
+    \item seL4, CertiKOS: verified kernels
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Formal Proofs in the AI Era}
+  \begin{quote}
+    We are sharing a selection of ten results, each of which resolves or makes
+    substantial progress on a long-standing open problem. These problems span
+    high-dimensional geometry, coding theory, arithmetic circuit complexity,
+    group theory, operator algebras, quantum complexity, lattice cryptography
+    and extremal combinatorics.
+  \end{quote}
+
+  \begin{quote}
+    The model formalized each argument in a Lean certificate.
+  \end{quote}
+
+  (OpenAI, Ten advances in mathematics and theoretical computer science\footnote{\url{https://openai.com/index/ten-advances-in-mathematics}})
+\end{frame}
+
+\begin{frame}{Formal Verification in the AI Era}
+  \begin{itemize}
+    \item From vibe coding to ``veri-coding''
+      \begin{itemize}
+        \item AIs write programs
+        \item AIs write proofs
+        \item Proofs are machine-checkable
+      \end{itemize}
+    \item Humans should decide and understand the proven properties
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Curry-Howard Correspondence}
+  \begin{itemize}
+    \item The core mechanism behind proof assistants based on dependent type theory
+      \begin{itemize}
+        \item Proposition = Type
+        \item Proof = Term (Program)
+        \item Validating a proof = Type checking a term
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Today's Topics}
+  \begin{itemize}
+    \item Functions and inductive types
+    \item Polymorphism
+    \item Dependent types
+    \item Curry-Howard correspondence
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Live Coding}
+  \begin{itemize}
+    \item Material at \url{https://github.com/plrg-unist/lean-intro}
+    \item Use VS Code or Lean Playground (\url{https://live.lean-lang.org/})
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{How to Verify Programs}
+  \begin{itemize}
+    \item Option 1: Write a program in a proof assistant and prove its properties
+    \item Option 2: Embed a program written in another language into a proof
+      assistant and prove its properties
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{More Resources}
+  \begin{itemize}
+    \item Software Foundations: \url{https://softwarefoundations.cis.upenn.edu/}
+    \item The Hitchhiker's Guide to Logical Verification
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Part 2 Preview}
+  \begin{itemize}
+    \item How can we state properties of programs?
+    \item Can we have proof techniques that can be applied to a wide range of programs?
+  \end{itemize}
+\end{frame}
+
+\end{document}
